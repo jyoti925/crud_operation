@@ -1,0 +1,48 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Registration form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="row justify-content-center">
+    <div class="col-sm-6"> 
+      <h2 class="text-muted"> Login</h2>
+         {% comment %} <p class="text-white-50 mb-5">Please enter your login and password!</p> {% endcomment %}
+      <form method = "POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{form.as_P}}
+        <div class="form-group">
+          <label for="{{form.username.id_for_label}}">Username</label>
+          <input type="text" name="{{form.username.name}}" placeholder="Enter User Name"  class="form-control"  value="{{form.username.value}}"/>
+          <span class="text-danger">{{form.username.error}}</span>
+      </div>
+  
+  
+      <div class="form-group">
+          <label for="{{form.password.id_for_label}}">Password</label>
+          <input type="password" name="{{form.password.name}}" placeholder="Enter Password"  class="form-control"  value="{{form.password.value}}"/>
+          <span class="text-danger">{{form.password.error}}</span>
+      </div>
+      
+      <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+
+      <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+      
+
+      <div>
+       <p class="mb-0">Don't have an account? <a href="{% url 'register' %}" class="btn btn-default">Sign Up</a></p>
+      </div>
+
+        
+    </div>
+  </div>
+
+{% endblock content  %}

@@ -1,0 +1,54 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Registration form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row justify-content-center">
+      <div class="col-sm-6">    
+        <h2 class="text-muted"> Sign Up</h2>
+        {% comment %} <p class="text-white-50 mb-2 text-center">Please enter following details</p> {% endcomment %}
+        <form method = "POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{form.as_P}}
+        
+            <div class="form-group ">
+                <label for="{{form.username.id_for_label}}">Username</label>
+                <input type="text" name="{{form.username.name}}" placeholder="Enter User Name"  class="form-control"  value="{{form.username.value}}"/>
+                <span class="text-danger">{{form.username.error}}</span>
+            </div>
+        
+        
+            <div class="form-group ">
+                <label for="{{form.password1.id_for_label}}">Password</label>
+                <input type="Password" name="{{form.password1.name}}" placeholder="Enter Password"  class="form-control"  value="{{form.password1.value}}"/>
+                <span class="text-danger">{{form.password1.error}}</span>
+            </div>
+        
+        
+            <div class="form-group ">
+                <label for="{{form.password2.id_for_label}}">Password</label>
+                
+                <input type="password" name="{{form.password2.name}}" placeholder="Enter  Confirm Password"  class="form-control"  value="{{form.password2.value}}"/>
+                <span class="text-danger">{{form.password2.error}}</span>
+            </div>
+        
+            <input type="submit" value="Submit" class="mt-4 px-3 btn btn-primary">
+            <div class="mt-4 px-3 text-center">
+                <p class="mb-0">Already have an account? <a href="{% url 'login' %}" class="text-white-50 fw-bold"><b>Login</b></a></p>
+            </div> 
+          </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
